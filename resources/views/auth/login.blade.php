@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <link rel="stylesheet" href="./assets/css/login.css" />
-    <title>Login Register Page</title>
-</head>
-
-<body>
+<x-app-layout-auth title="Auth">
     <button id="back-button"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#2A4264"
             class="bi bi-arrow-left" viewBox="0 0 16 14">
             <path fill-rule="evenodd"
@@ -17,15 +6,23 @@
         </svg></button>
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form>
+            <form method="POST" action="{{ route('store.register') }}">
+                @csrf
                 <h1>Buat Akun</h1>
                 <span></span>
-                <input type="text" placeholder="Nama" />
-                <input type="email" placeholder="E-mail" />
-                <input type="tel" placeholder="No. Handphone" />
-                <input type="password" placeholder="Password" />
-                <input type="password" placeholder="Konfirmasi Password" />
-                <button>Daftar</button>
+                <input type="text" placeholder="Nama" name="name" />
+                <x-input-error class="mt-2" :messages="$errors->get('name')" />
+                <input type="email" placeholder="E-mail" name="email" />
+                <x-input-error class="mt-2" :messages="$errors->get('email')" />
+                <input type="alamat" placeholder="Alamat" name="alamat" />
+                <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
+                <input type="tel" placeholder="No. Handphone"name="nomorHp" />
+                <x-input-error class="mt-2" :messages="$errors->get('nomorHp')" />
+                <input type="password" placeholder="Password" name="password" />
+                <x-input-error class="mt-2" :messages="$errors->get('password')" />
+                <input type="password" placeholder="Konfirmasi Password" name="password_confirmation" />
+                <x-input-error class="mt-2" :messages="$errors->get('password_confirmation')" />
+                <button type="submit">Daftar</button>
             </form>
         </div>
         <div class="form-container sign-in">
@@ -34,9 +31,9 @@
                 <h1>Masuk</h1>
                 <span></span>
                 <input type="email" name="email" placeholder="Email" required value="{{ old('email') }}" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-input-error class="mt-2" :messages="$errors->get('email')" />
                 <input type="password" name="password" placeholder="Password" required />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-input-error class="mt-2" :messages="$errors->get('password')" />
                 <a href="#">Lupa Password?</a>
                 <button type="submit">Masuk</button>
             </form>
@@ -56,8 +53,4 @@
             </div>
         </div>
     </div>
-
-    <script src="./assets/js/main.js"></script>
-</body>
-
-</html>
+</x-app-layout-auth>
