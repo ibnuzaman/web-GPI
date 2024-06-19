@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand ps-3" href="#"><img src="./assets/img/logo GPI.png" alt="" width="100px"></a>
+        <a class="navbar-brand ps-3" href="/"><img src="./assets/img/logo GPI.png" alt="" width="100px"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,18 +8,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mt-2 mb-lg-2 flex-grow-1 justify-content-center ps-3">
                 <li class="nav-item ps-3">
-                    <a class="nav-link {{ Route::currentRouteName() == 'home' ?: '' }} " aria-current="page"
+                    <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" aria-current="page"
                         href="/">Home</a>
                 </li>
                 <li class="nav-item ps-3">
-                    <a class="nav-link {{ Route::currentRouteName() == 'produk' ?: '' }}"
+                    <a class="nav-link {{ Route::currentRouteName() == 'produk' ? 'active' : '' }}"
                         href="{{ route('produk') }}">Produk</a>
                 </li>
                 <li class="nav-item ps-3">
-                    <a class="nav-link {{ Route::currentRouteName() == 'transaksi' ?: '' }}"
+                    <a class="nav-link {{ Route::currentRouteName() == 'transaksi' ? 'active' : '' }}"
                         href="{{ route('transaksi') }}">Transaksi</a>
                 </li>
             </ul>
+
+
             <div class="nav-button ps-lg-3 ps-4 pt-auto">
                 <div class="nav-button ps-lg-3 ps-4 pt-auto">
                     @guest
@@ -44,6 +46,10 @@
                                             style="border: none; background: none; padding: 0; margin: 0;">Logout</button>
                                     </form>
                                 </li>
+                                @if (Auth::user()->role === 'admin')
+                                    <li><a class="dropdown-item" href="{{ route('admin.dashboard-admin') }}">Dashboard
+                                            Admin</a></li>
+                                @endif
                             </ul>
                         </div>
                     @endguest

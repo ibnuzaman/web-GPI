@@ -1,11 +1,11 @@
-<x-app-layout>
+<x-app-layout title="Home">
     <x-navbar />
 
     <section class="d-flex hero-section">
         <div class="hero-container container-fluid">
             <h1>Ingin Menemukan</h1>
             <h1> Produk Lebih Banyak?</h1>
-            <a href="produk.html"><button class="btn btn-light"><span>Cek Disini</span></button></a>
+            <a href="{{ route('produk') }}"><button class="btn btn-light"><span>Cek Disini</span></button></a>
         </div>
     </section>
 

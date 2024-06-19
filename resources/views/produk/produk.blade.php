@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Produk">
     <x-navbar />
 
     <div class="container mt-5 pt-5">

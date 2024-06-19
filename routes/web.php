@@ -26,12 +26,16 @@ require __DIR__ . '/auth.php';
 
 // Customer route
 Route::middleware(['auth', 'customerMiddleware'])->group(function () {
-    Route::get('dashboard', [CustomerController::class, 'transaksi'])->name('transaksi');
+    Route::get('Home', [CustomerController::class, 'index'])->name('home-customer');
+    Route::get('Transaksi', [CustomerController::class, 'transaksi'])->name('transaksi');
 });
 
 // Admin route
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard-admin');
+    Route::get('/admin/produk', [AdminController::class, 'produk'])->name('admin.produk-admin');
+    Route::get('/admin/rekapData', [AdminController::class, 'rekapData'])->name('admin.rekap-admin');
+    Route::get('/admin/konfirmasi-admin', [AdminController::class, 'konfirmasiBayar'])->name('admin.konfirmasi-admin');
 });
 
 

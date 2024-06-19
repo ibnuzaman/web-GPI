@@ -33,7 +33,12 @@ class AuthenticatedSessionController extends Controller
             return redirect(route('admin.dashboard-admin'));
         }
 
-        return redirect()->intended(route('index', absolute: false));
+        if (Auth::user()->role == 'customer') {
+            return redirect(route('home-customer'));
+        }
+
+        // return redirect()->intended(route('index', absolute: false));
+        return redirect()->back();
     }
 
     /**

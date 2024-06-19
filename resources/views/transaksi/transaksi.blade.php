@@ -1,8 +1,5 @@
-<x-app-layout>
+<x-app-layout title="Transaksi">
     <x-navbar />
-
-
-
     <section id="transaksi">
         <div class="container-fluid transaksi-container">
             <div class="header-transaksi pt-5">
