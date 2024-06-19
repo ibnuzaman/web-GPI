@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function transaksi()
     {
-        return view('index');
+        return view('transaksi.transaksi');
     }
 }

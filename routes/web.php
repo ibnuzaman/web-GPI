@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ProdukController;
@@ -10,6 +9,7 @@ use App\Http\Controllers\ProdukController;
 Route::get('/', function () {
     return view('index');
 });
+
 
 // Route::get('/dashboard', function () {
 //     return view('index');
@@ -26,7 +26,7 @@ require __DIR__ . '/auth.php';
 
 // Customer route
 Route::middleware(['auth', 'customerMiddleware'])->group(function () {
-    Route::get('dashboard', [CustomerController::class, 'index'])->name('index');
+    Route::get('dashboard', [CustomerController::class, 'transaksi'])->name('transaksi');
 });
 
 // Admin route
