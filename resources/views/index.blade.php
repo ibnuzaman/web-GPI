@@ -20,38 +20,50 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="nav-button ps-lg-3 ps-4 pt-auto">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mt-2 mb-lg-2 flex-grow-1 justify-content-center ps-3">
+                    <li class="nav-item ps-3">
+                        <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
+                    </li>
+                    <li class="nav-item ps-3">
+                        <a class="nav-link" href="{{ route('produk') }}">Produk</a>
+                    </li>
+                    <li class="nav-item ps-3">
+                        <a class="nav-link" href="transaksi.html">Transaksi</a>
+                    </li>
+                </ul>
                 <div class="nav-button ps-lg-3 ps-4 pt-auto">
-                    @guest
-                        <a href="{{ route('login') }}"><button class="login-btn pe-4">Masuk</button></a>
-                        <a href="{{ route('register') }}"><button class="register-btn">Daftar</button></a>
-                    @else
-                        <div class="dropdown">
-                            <button class="btn dropdown-toggle welcome-btn pe-4 ms-4" id="welcomeBtn" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Welcome, <span id="nav-username">{{ Auth::user()->name }}</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-                                    class="bi bi-person-fill" viewBox="0 0 16 20">
-                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                                </svg>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="welcomeBtn">
-                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-                                <li>
-                                    <form action="{{ route('logout') }}" method="POST" class="dropdown-item">
-                                        @csrf
-                                        <button type="submit"
-                                            style="border: none; background: none; padding: 0; margin: 0;">Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    @endguest
+                    <div class="nav-button ps-lg-3 ps-4 pt-auto">
+                        @guest
+                            <a href="{{ route('login') }}"><button class="login-btn pe-4">Masuk</button></a>
+                            <a href="{{ route('register') }}"><button class="register-btn">Daftar</button></a>
+                        @else
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle welcome-btn pe-4 ms-4" id="welcomeBtn" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Welcome, <span id="nav-username">{{ Auth::user()->name }}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                        class="bi bi-person-fill" viewBox="0 0 16 20">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="welcomeBtn">
+                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST" class="dropdown-item">
+                                            @csrf
+                                            <button type="submit"
+                                                style="border: none; background: none; padding: 0; margin: 0;">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endguest
+                    </div>
+
                 </div>
 
             </div>
-
-        </div>
     </nav>
 
     <section class="d-flex hero-section">
@@ -108,11 +120,13 @@
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                data-bs-slide="prev">
                 <span class="custom-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                data-bs-slide="next">
                 <span class="custom-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
