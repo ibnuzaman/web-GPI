@@ -14,6 +14,11 @@ class ProdukController extends Controller
         return view('produk.produk');
     }
 
+    public function detailProduk()
+    {
+        return view('produk.detail-produk');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

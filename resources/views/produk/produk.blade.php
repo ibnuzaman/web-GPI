@@ -19,7 +19,7 @@
                         <h5 class="card-title">Product 1</h5>
                         <p class="card-text">Stok: 10</p>
                         <p class="card-text">Harga: Rp100.000.000</p>
-                        <a href="detail-produk.html" class="btn-beli"><button class="btn">Beli</button></a>
+                        <a href="{{ route('detail-produk') }}" class="btn-beli"><button class="btn">Beli</button></a>
                     </div>
                 </div>
             </div>

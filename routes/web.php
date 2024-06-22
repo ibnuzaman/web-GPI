@@ -4,11 +4,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\ProdukController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 
 
 // Route::get('/dashboard', function () {
@@ -39,4 +40,6 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
 });
 
 
+// Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('test');
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
+Route::get('/detail-produk', [ProdukController::class, 'detailProduk'])->name('detail-produk');

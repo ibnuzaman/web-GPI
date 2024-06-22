@@ -1,6 +1,4 @@
 <x-app-layout-auth title="Auth">
-
-
     <button id="back-button"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#2A4264"
             class="bi bi-arrow-left" viewBox="0 0 16 14">
             <path fill-rule="evenodd"

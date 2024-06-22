@@ -34,7 +34,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('email')" />
                 <input type="password" name="password" placeholder="Password" required />
                 <x-input-error class="mt-2" :messages="$errors->get('password')" />
-                <a href="#">Lupa Password?</a>
+                <a href="{{ route('password.request') }}">Lupa Password?</a>
                 <button type="submit">Masuk</button>
             </form>
         </div>

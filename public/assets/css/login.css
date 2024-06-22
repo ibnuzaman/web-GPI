@@ -196,74 +196,23 @@ body{
 /* EndLogin */
 
 /* Forget Paswword */
-.container-forget h1{
-    margin-top: 20px;
 
-}
-
-.container-forget a{
-    color: #333;
-    font-size: 13px;
-    text-decoration: none;
-    margin: 15px 0 10px;
-}
-
-.container-forget p{
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.3px;
-    margin: 20px 0;
-}
-
-.container-forget{
-    background-color: #FFF;
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-    position: relative;
-    overflow: hidden;
-    width: 768px;
-    max-width: 100%;
-    min-height: 480px;
-}
-
-.container-forget form{
-    background-color: #DFEAEC;
+.container-forget {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    padding: 0 40px;
-    height: 100%;
 }
 
-.container-forget button{
-    background-color: #2A4264;
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 45px;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 10px;
-    cursor: pointer;
-}
-.form-container-forget h1 {
-    padding: 30px;
-}
-.form-container-forget span {
-    margin: 50px;
-    font-size: 15px;
+.container-forget h1 {
+    margin-bottom: 80px;
 }
 
-.container-forget input {
-    border-radius: 8px;
-    margin-bottom: 50px;
-    width: 300px;
-    padding: 6px;
-    background-color: #fafafa;
+#forgot-password-form {
+    padding-bottom: 50px;
 }
+
+/* End Forget Pasword */
 
 #back-button {
     position: absolute;
@@ -276,4 +225,5 @@ body{
 }
 
 
-/* End Forget Pasword */
+
+
