@@ -37,9 +37,13 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/produk', [AdminController::class, 'produk'])->name('admin.produk-admin');
     Route::get('/admin/rekapData', [AdminController::class, 'rekapData'])->name('admin.rekap-admin');
     Route::get('/admin/konfirmasi-admin', [AdminController::class, 'konfirmasiBayar'])->name('admin.konfirmasi-admin');
+    Route::get('/tambah-admin', [AdminController::class, 'tambahAdmin'])->name('tambah-admin');
+    Route::post('/register-admin', [AdminController::class, 'storeAdmin'])->name('store.admin');
 });
 
 
 // Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('test');
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 Route::get('/detail-produk', [ProdukController::class, 'detailProduk'])->name('detail-produk');
+Route::get('/add-produk', [ProdukController::class, 'addProduk'])->name('add-produk');
+Route::get('/edit-produk', [ProdukController::class, 'editProduk'])->name('edit-produk');

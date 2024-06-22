@@ -18,6 +18,14 @@ class ProdukController extends Controller
     {
         return view('produk.detail-produk');
     }
+    public function addProduk()
+    {
+        return view('admin.addProduct-admin');
+    }
+    public function editProduk()
+    {
+        return view('admin.editProduct-admin');
+    }
 
     /**
      * Show the form for creating a new resource.

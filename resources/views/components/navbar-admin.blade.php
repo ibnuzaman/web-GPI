@@ -14,7 +14,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Add New Admin</a></li>
+                        <li><a class="dropdown-item" href="{{ route('tambah-admin') }}">Add New Admin</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>

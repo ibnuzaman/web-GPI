@@ -66,7 +66,7 @@
                     </button>
                     @if (session('status') === 'profile-updated')
                         <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                            class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
+                            class="text-sm text-gray-600 dark:text-gray-400">{{ __('Tersimpan') }}</p>
                     @endif
                 </div>
             </form>
@@ -133,31 +133,16 @@
                     </button>
                     @if (session('status') === 'password-updated')
                         <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                            class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
+                            class="text-sm text-gray-600 dark:text-gray-400">{{ __('Tersimpan') }}</p>
                     @endif
                 </div>
 
-                {{-- <div class="flex items-center gap-4">
-                    <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-                    @if (session('status') === 'password-updated')
-                        <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                            class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
-                    @endif
-                </div> --}}
-
             </form>
-
         </div>
     </section>
 
 
-    <div class="floating-whatsapp-button">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <a href="#" class="float" target="_blank">
-            <i class="fa fa-whatsapp my-float"></i>
-        </a>
-    </div>
+    <x-button-whatsapp />
 
     <x-footer />
 </x-app-layout>

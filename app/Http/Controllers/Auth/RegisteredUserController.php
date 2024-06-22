@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
             'alamat' => ['required', 'string', 'max:255'],
             'nomorHp' => ['required', 'string', 'max:16'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'in:admin,customer'],
         ]);
 
         $user = User::create([
@@ -42,15 +43,23 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'alamat' => $request->alamat,
             'nomorHp' => $request->nomorHp,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+        dd($request->all());
 
-        // return redirect(route('dashboard', absolute: false));
-        return redirect(route('home-customer', absolute: false));
-        // return redirect(route('home-customer'));
+        // Auth::login($user);
+
+        // // return redirect(route('dashboard', absolute: false));
+        // // return redirect(route('home-customer', absolute: false));
+        // // return redirect(route('home-customer'));
+        // if ($user->role === 'admin') {
+        //     return redirect()->back();
+        // } else {
+        //     return redirect(route('home-customer', absolute: false)); // Customer home
+        // }
     }
 }

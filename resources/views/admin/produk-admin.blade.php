@@ -22,7 +22,8 @@
                                     <span class="judul-table"></span>
                                 </th>
                                 <th colspan="2" style="text-align: right;">
-                                    <button class="btn btn-add-product">Tambah Produk</button>
+                                    <a href="{{ route('add-produk') }}"><button class="btn btn-add-product">Tambah
+                                            Produk</button></a>
                                 </th>
                             </tr>
                             <tr class="table-primary">
@@ -42,7 +43,8 @@
                                 <td>12</td>
                                 <td>Rp100.000</td>
                                 <td>
-                                    <button class="btn btn-primary">Edit</button>
+                                    <a href="{{ route('edit-produk') }}"><button class="btn btn-primary">Edit</button>
+                                    </a>
                                     <button class="btn btn-danger">Hapus</button>
                                 </td>
                             </tr>
