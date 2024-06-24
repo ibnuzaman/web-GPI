@@ -26,6 +26,7 @@
                 <x-input-error class="mt-2" :messages="$errors->get('password')" />
                 <input type="password" placeholder="Konfirmasi Password" name="password_confirmation" />
                 <x-input-error class="mt-2" :messages="$errors->get('password_confirmation')" />
+                <input type="hidden" name="role" id="role" value="customer">
                 <button type="submit">Daftar</button>
             </form>
         </div>

@@ -34,16 +34,21 @@ Route::middleware(['auth', 'customerMiddleware'])->group(function () {
 // Admin route
 Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard-admin');
-    Route::get('/admin/produk', [AdminController::class, 'produk'])->name('admin.produk-admin');
     Route::get('/admin/rekapData', [AdminController::class, 'rekapData'])->name('admin.rekap-admin');
     Route::get('/admin/konfirmasi-admin', [AdminController::class, 'konfirmasiBayar'])->name('admin.konfirmasi-admin');
     Route::get('/tambah-admin', [AdminController::class, 'tambahAdmin'])->name('tambah-admin');
     Route::post('/register-admin', [AdminController::class, 'storeAdmin'])->name('store.admin');
+    Route::get('/admin/produk', [ProdukController::class, 'create'])->name('admin.produk-admin');
+    Route::get('/add-produk', [ProdukController::class, 'addProduk'])->name('add-produk');
+    // // Route::get('/detail-produk', [ProdukController::class, 'detailProduk'])->name('detail-produk');
+    // Route::get('/detail-produk/{id}', [ProdukController::class, 'show'])->name('detail-produk');
+    Route::get('/edit-produk/{id}', [ProdukController::class, 'editProduk'])->name('edit-produk');
+    Route::put('/update-produk/{id}', [ProdukController::class, 'updateProduk'])->name('update-produk');
+    Route::delete('/hapus-produk/{id}', [ProdukController::class, 'hapusProduk'])->name('hapus-produk');
+    Route::post('/tambah', [ProdukController::class, 'storeProduk'])->name('store-produk')->middleware(['auth', 'adminMiddleware']);
 });
 
 
-// Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('test');
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
-Route::get('/detail-produk', [ProdukController::class, 'detailProduk'])->name('detail-produk');
-Route::get('/add-produk', [ProdukController::class, 'addProduk'])->name('add-produk');
-Route::get('/edit-produk', [ProdukController::class, 'editProduk'])->name('edit-produk');
+Route::get('/detail-produk/{id}', [ProdukController::class, 'show'])->name('detail-produk');
+Route::get('/test', [ProdukController::class, 'detailProduk']);

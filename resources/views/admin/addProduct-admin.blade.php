@@ -10,59 +10,51 @@
     </button>
 
     <div class="main-content">
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Welcome, Admin
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Add New Admin</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <x-navbar-admin />
 
         <div class="content-container container mt-4">
             <h1>Tambah Produk</h1>
             <div class="container input-container mt-5">
-                <form action="POST">
+                <form action="{{ route('store-produk') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @if (session('success'))
+                        <div class="alert alert-success mt-3">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger mt-3">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="row pe-auto">
                         <label for="nama-produk">
                             <h5>Nama Produk</h5>
                         </label>
-                        <input type="text" id="nama-produk" placeholder="Masukkan Nama Produk" maxlength="200">
+                        <input type="text" name="nama_produk" id="nama-produk" placeholder="Masukkan Nama Produk"
+                            maxlength="200" required>
                         <hr>
                         <label for="foto-produk">
                             <h5>Foto Produk</h5>
                         </label>
-                        <input type="file" id="foto-produk">
+                        <input type="file" name="foto" id="foto-produk" required>
                         <hr>
                         <label for="qty-produk">
                             <h5>Kuantitas</h5>
                         </label>
-                        <input type="number" id="qty-produk" placeholder="Masukkan Jumlah barang">
+                        <input type="number" name="stok" id="qty-produk" placeholder="Masukkan Jumlah barang"
+                            required>
                         <hr>
                         <label for="harga-produk">
                             <h5>Harga</h5>
                         </label>
-                        <input type="number" id="harga-produk" placeholder="Masukkan Harga">
+                        <input type="number" name="harga" id="harga-produk" placeholder="Masukkan Harga" required>
                         <hr>
+                        <button type="submit">Simpan</button>
                     </div>
                 </form>
             </div>

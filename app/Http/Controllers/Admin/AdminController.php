@@ -57,8 +57,6 @@ class AdminController extends Controller
 
         event(new Registered($user));
         session()->flash('success', 'Akun berhasil didaftarkan.');
-
-        // dd($request->all());
         return redirect()->back();
     }
 }

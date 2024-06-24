@@ -10,61 +10,60 @@
     </button>
 
     <div class="main-content">
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Welcome, Admin
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Add New Admin</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <x-navbar-admin />
 
         <div class="content-container container mt-4">
             <h1>Edit Produk</h1>
             <div class="container input-container mt-5">
-                <form action="GET">
+                <form action="{{ route('update-produk', ['id' => $product->id]) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
                     <div class="row pe-auto">
                         <label for="nama-produk">
                             <h5>Nama Produk</h5>
                         </label>
-                        <input type="text" id="nama-produk" placeholder="Masukkan Nama Produk" maxlength="200"
-                            value="Plastik">
+                        <input type="text" id="nama-produk" name="nama_produk" placeholder="Masukkan Nama Produk"
+                            maxlength="200" value="{{ old('nama_produk', $product->nama_produk) }}">
+                        @error('nama_produk')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                         <hr>
                         <label for="foto-produk">
                             <h5>Foto Produk</h5>
                         </label>
-                        <input type="file" id="foto-produk">
+                        <input type="file" id="foto-produk" name="foto">
+                        @if ($product->foto)
+                            <p>Current Foto:</p>
+                            <img src="{{ asset('storage/' . $product->foto) }}" alt="Foto Produk"
+                                style="max-width: 100px;">
+                        @else
+                            <p>Foto tidak tersedia</p>
+                        @endif
+                        @error('foto')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                         <hr>
                         <label for="qty-produk">
                             <h5>Kuantitas</h5>
                         </label>
-                        <input type="number" id="qty-produk" placeholder="Masukkan Jumlah barang" value="50">
+                        <input type="number" id="qty-produk" name="stok" placeholder="Masukkan Jumlah barang"
+                            value="{{ old('stok', $product->stok) }}">
+                        @error('stok')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                         <hr>
                         <label for="harga-produk">
                             <h5>Harga</h5>
                         </label>
-                        <input type="number" id="harga-produk" placeholder="Masukkan Harga" value="100000">
+                        <input type="number" id="harga-produk" name="harga" placeholder="Masukkan Harga"
+                            value="{{ old('harga', $product->harga) }}">
+                        @error('harga')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                         <hr>
-                        <button class="btn btn-simpan-edit">Simpan</button>
+                        <button type="submit" class="btn btn-simpan-edit">Simpan</button>
+                        <a href="{{ route('admin.produk-admin') }}" class="btn btn-secondary">Kembali</a>
                     </div>
                 </form>
             </div>

@@ -49,17 +49,17 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        dd($request->all());
+        // dd($request->all());
 
-        // Auth::login($user);
+        Auth::login($user);
 
         // // return redirect(route('dashboard', absolute: false));
         // // return redirect(route('home-customer', absolute: false));
-        // // return redirect(route('home-customer'));
-        // if ($user->role === 'admin') {
-        //     return redirect()->back();
-        // } else {
-        //     return redirect(route('home-customer', absolute: false)); // Customer home
-        // }
+        // return redirect(route('home-customer'));
+        if ($user->role === 'admin') {
+            return redirect()->back();
+        } else {
+            return redirect(route('home-customer', absolute: false)); // Customer home
+        }
     }
 }

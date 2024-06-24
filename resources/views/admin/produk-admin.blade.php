@@ -13,6 +13,20 @@
 
         <div class="content-container container mt-4">
             <h1>Produk</h1>
+            @if (session('success'))
+                <div class="alert alert-success mt-3">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-xl-12">
                     <table class="table table-hover">
@@ -22,8 +36,9 @@
                                     <span class="judul-table"></span>
                                 </th>
                                 <th colspan="2" style="text-align: right;">
-                                    <a href="{{ route('add-produk') }}"><button class="btn btn-add-product">Tambah
-                                            Produk</button></a>
+                                    <a href="{{ route('add-produk') }}">
+                                        <button class="btn btn-add-product">Tambah Produk</button>
+                                    </a>
                                 </th>
                             </tr>
                             <tr class="table-primary">
@@ -36,23 +51,39 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Produk A</td>
-                                <td>Ini foto</td>
-                                <td>12</td>
-                                <td>Rp100.000</td>
-                                <td>
-                                    <a href="{{ route('edit-produk') }}"><button class="btn btn-primary">Edit</button>
-                                    </a>
-                                    <button class="btn btn-danger">Hapus</button>
-                                </td>
-                            </tr>
+                            @foreach ($products as $index => $product)
+                                <tr>
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $product->nama_produk }}</td>
+                                    <td>
+                                        @if ($product->foto)
+                                            <img src="{{ asset('storage/' . $product->foto) }}" alt="Foto Produk"
+                                                style="max-width: 100px;">
+                                        @else
+                                            Foto tidak tersedia
+                                        @endif
+                                    </td>
+                                    <td>{{ $product->stok }}</td>
+                                    <td>Rp {{ number_format($product->harga, 0, ',', '.') }}</td>
+                                    <td>
+                                        <a href="{{ route('edit-produk', $product->id) }}">
+                                            <button class="btn btn-primary">Edit</button>
+                                        </a>
+                                        <form action="{{ route('hapus-produk', $product->id) }}" method="POST"
+                                            style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
     </div>
 
 </x-app-layout-admin>
