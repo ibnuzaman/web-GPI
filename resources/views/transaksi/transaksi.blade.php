@@ -1,5 +1,6 @@
 <x-app-layout title="Transaksi">
     <x-navbar />
+
     <section id="transaksi">
         <div class="container-fluid transaksi-container">
             <div class="header-transaksi pt-5">
@@ -11,37 +12,32 @@
                         <tr>
                             <th>No</th>
                             <th>Produk</th>
-                            <th>Jenis Pengiriman</th>
+                            <th>Nama Customer</th>
+                            <th>No HP Customer</th>
+                            <th>Jumlah Barang</th>
                             <th>Tanggal</th>
                             <th>Harga</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Data transaksi akan ditambahkan di sini -->
-                        <tr>
-                            <td>1</td>
-                            <td>Produk A</td>
-                            <td>Diambil</td>
-                            <td>31-12-2024</td>
-                            <td>Rp 100.000</td>
-                            <td>Sukses</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Produk B</td>
-                            <td>Diantar</td>
-                            <td>31-12-2024</td>
-                            <td>Rp 200.000</td>
-                            <td>Sukses</td>
-                        </tr>
-
+                        @foreach ($transactions as $transaction)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $transaction->product->nama_produk }}</td>
+                                <td>{{ $transaction->nama_customer }}</td>
+                                <td>{{ $transaction->no_hp_customer }}</td>
+                                <td>{{ $transaction->jumlah_barang }}</td>
+                                <td>{{ $transaction->created_at->format('d-m-Y') }}</td>
+                                <td>Rp {{ number_format($transaction->total_harga, 0, ',', '.') }}</td>
+                                <td>{{ $transaction->status }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
-
 
     <div class="floating-whatsapp-button">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -49,5 +45,6 @@
             <i class="fa fa-whatsapp my-float"></i>
         </a>
     </div>
+
     <x-footer />
 </x-app-layout>

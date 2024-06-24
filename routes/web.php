@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProdukController;
 
 Route::get('/', function () {
@@ -29,6 +30,7 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth', 'customerMiddleware'])->group(function () {
     Route::get('Home', [CustomerController::class, 'index'])->name('home-customer');
     Route::get('Transaksi', [CustomerController::class, 'transaksi'])->name('transaksi');
+    Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 });
 
 // Admin route

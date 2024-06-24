@@ -11,6 +11,7 @@ class Orders extends Model
     use HasFactory;
 
     protected $fillable = [
+        'product_id',
         'total_harga',
         'status',
         'user_id',
@@ -19,5 +20,9 @@ class Orders extends Model
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function product()
+    {
+        return $this->belongsTo(Products::class, 'product_id');
     }
 }
