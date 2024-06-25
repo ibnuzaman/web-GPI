@@ -44,7 +44,7 @@
                         <input type="file" name="foto" id="foto-produk" required>
                         <hr>
                         <label for="qty-produk">
-                            <h5>Kuantitas</h5>
+                            <h5>Stok</h5>
                         </label>
                         <input type="number" name="stok" id="qty-produk" placeholder="Masukkan Jumlah barang"
                             required>

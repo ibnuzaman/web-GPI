@@ -30,19 +30,8 @@
                                     <td>Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
                                     <td>{{ $order->created_at->format('d/m/Y') }}</td>
                                     <td>
-                                        @if ($order->status == 'pending')
-                                            <form action="{{ route('admin.orders.confirm', $order->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-success">Terima</button>
-                                            </form>
-                                            <form action="{{ route('admin.orders.reject', $order->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Tolak</button>
-                                            </form>
-                                        @else
-                                            <span>{{ $order->status }}</span>
-                                        @endif
+                                        <span>{{ $order->status }}</span>
+
                                     </td>
                                 </tr>
                             @endforeach

@@ -21,6 +21,8 @@ class Orders extends Model
         'id',
     ];
 
+    protected $table = 'orders';
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -28,6 +30,6 @@ class Orders extends Model
 
     public function product()
     {
-        return $this->belongsTo(Products::class, 'id');
+        return $this->belongsTo(Products::class, 'nama_produk', 'nama_produk');
     }
 }

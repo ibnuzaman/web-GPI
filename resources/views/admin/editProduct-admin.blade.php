@@ -45,7 +45,7 @@
                         @enderror
                         <hr>
                         <label for="qty-produk">
-                            <h5>Kuantitas</h5>
+                            <h5>Stok</h5>
                         </label>
                         <input type="number" id="qty-produk" name="stok" placeholder="Masukkan Jumlah barang"
                             value="{{ old('stok', $product->stok) }}">

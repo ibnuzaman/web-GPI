@@ -42,17 +42,18 @@ class AdminController extends Controller
     // Method untuk menangani konfirmasi pembayaran
     public function confirm(Orders $order)
     {
-        // Ubah status order menjadi diterima
         $order->status = 'diterima';
         $order->save();
+        // Ambil produk terkait dengan order
+        $product = $order->product;
 
-        // Kurangi stok produk berdasarkan jumlah barang yang dibeli
-        $product = Products::find($order->id); // Menggunakan $order->id karena Anda menggunakan 'id' sebagai product_id
+        // Debug: Cetak produk terkait dengan order
+        // dd($product->stok);
+
         if (!$product) {
             return back()->with('error', 'Produk tidak ditemukan.');
         }
 
-        // Periksa apakah stok mencukupi sebelum mengurangi
         if ($product->stok >= $order->jumlah_beli) {
             $product->stok -= $order->jumlah_beli;
             $product->save();

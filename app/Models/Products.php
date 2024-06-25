@@ -16,9 +16,11 @@ class Products extends Model
         'stok',
     ];
 
+    protected $table = 'products';
+
     public function orders()
     {
-        return $this->hasMany(Orders::class);
+        return $this->hasMany(Orders::class, 'product_id', 'id');
     }
 
     public function rekapData()
