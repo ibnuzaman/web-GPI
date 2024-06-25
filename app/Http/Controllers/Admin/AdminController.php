@@ -11,12 +11,17 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use App\Models\RekapData;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard-admin');
+        $orders = Orders::where('status', 'confirmed')->orderBy('created_at', 'desc')->take(5)->get();
+        $totalProducts = Products::count();
+        $rekapData = RekapData::orderBy('created_at', 'desc')->take(5)->get();
+
+        return view('admin.dashboard-admin', compact('orders', 'totalProducts', 'rekapData'));
     }
 
     public function produk()

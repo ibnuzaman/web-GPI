@@ -22,7 +22,8 @@
                                     <span class="judul-table">Konfirmasi Pembayaran</span>
                                 </th>
                                 <th colspan="2" style="text-align: right;">
-                                    <button class="btn btn-lihat">Lihat Semua</button>
+                                    <a href="{{ route('admin.konfirmasi-admin') }}" class="btn btn-lihat">Lihat
+                                        Semua</a>
                                 </th>
                             </tr>
                             <tr class="table-primary">
@@ -37,16 +38,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Produk A</td>
-                                <td>John Doe</td>
-                                <td>1234567890</td>
-                                <td>2</td>
-                                <td>2024-06-11</td>
-                                <td>Rp100.000</td>
-                                <td>Confirmed</td>
-                            </tr>
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->product->nama_produk }}</td>
+                                    <td>{{ $order->nama_customer }}</td>
+                                    <td>{{ $order->nomorHp }}</td>
+                                    <td>{{ $order->jumlah_beli }}</td>
+                                    <td>{{ $order->created_at->format('Y-m-d') }}</td>
+                                    <td>Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
+                                    <td>{{ $order->status }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -54,7 +57,7 @@
                     <div class="card card-product border-0">
                         <div class="card-body">
                             <h4 class="card-title">Total Produk</h4>
-                            <h1>30</h1>
+                            <h1>{{ $totalProducts }}</h1>
                             <h6>Produk</h6>
                         </div>
                     </div>
@@ -68,7 +71,7 @@
                                 <span class="judul-table">Rekap Data Penjualan</span>
                             </th>
                             <th colspan="2" style="text-align: right;">
-                                <button class="btn btn-lihat">Lihat Semua</button>
+                                <a href="{{ route('admin.rekap-admin') }}" class="btn btn-lihat">Lihat Semua</a>
                             </th>
                         </tr>
                         <tr class="table-primary">
@@ -79,16 +82,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Produk X</td>
-                            <td>10</td>
-                            <td>Rp500.000</td>
-                            <td>2024-06-10</td>
-                        </tr>
+                        @foreach ($rekapData as $data)
+                            <tr>
+                                <td>{{ $data->product->nama_produk }}</td>
+                                <td>{{ $data->jumlah_terjual }}</td>
+                                <td>Rp {{ number_format($data->total_harga, 0, ',', '.') }}</td>
+                                <td>{{ $data->created_at->format('Y-m-d') }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 </x-app-layout-admin>
