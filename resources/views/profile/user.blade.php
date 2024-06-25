@@ -1,6 +1,6 @@
 <x-app-layout title="Profile">
     <x-navbar />
-
+    {{-- {{ dd(Auth::user()->role) }} --}}
 
     {{-- Update Informasi Profile --}}
     <section id="profile">

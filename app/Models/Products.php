@@ -15,4 +15,14 @@ class Products extends Model
         'harga',
         'stok',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Orders::class);
+    }
+
+    public function rekapData()
+    {
+        return $this->hasMany(RekapData::class);
+    }
 }

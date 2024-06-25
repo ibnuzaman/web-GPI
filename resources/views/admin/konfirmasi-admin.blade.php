@@ -13,6 +13,34 @@
 
         <div class="content-container container mt-4">
             <h1>Konfirmasi Pembayaran</h1>
+            @if (session('success'))
+                <div class="alert alert-success mt-3">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success mt-3">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger mt-3">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-xl-12">
                     <table class="table table-hover">
@@ -29,25 +57,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Produk A</td>
-                                <td>Abdul</td>
-                                <td>0888888888</td>
-                                <td>100</td>
-                                <td>1/1/2021</td>
-                                <td>Rp100.000</td>
-                                <td>
-                                    <button class="btn btn-success">Terima</button>
-                                    <button class="btn btn-danger">Tolak</button>
-                                </td>
-                            </tr>
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td>{{ $order->id }}</td>
+                                    <td>{{ $order->nama_produk }}</td>
+                                    <td>{{ $order->nama_customer }}</td>
+                                    <td>{{ $order->nomorHp }}</td>
+                                    <td>{{ $order->jumlah_beli }}</td>
+                                    <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                                    <td>Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
+                                    <td>
+                                        @if ($order->status == 'pending')
+                                            <form action="{{ route('admin.orders.diterima', $order->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success">Terima</button>
+                                            </form>
+                                            <form action="{{ route('admin.orders.ditolak', $order->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Tolak</button>
+                                            </form>
+                                        @else
+                                            <span>{{ $order->status }}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
 
 </x-app-layout-admin>

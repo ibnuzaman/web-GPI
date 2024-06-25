@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Orders;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -24,12 +26,56 @@ class AdminController extends Controller
 
     public function rekapData()
     {
-        return view('admin.rekap-admin');
+        $orders = Orders::where('status', 'diterima')->orderByDesc('created_at')->get();
+
+        return view('admin.rekap-admin', compact('orders'));
     }
+
     public function konfirmasiBayar()
     {
-        return view('admin.konfirmasi-admin');
+        $orders = Orders::where('status', 'pending')->orderByDesc('created_at')->get();
+
+        return view('admin.konfirmasi-admin', compact('orders'));
+        // return view('admin.konfirmasi-admin');
     }
+
+    // Method untuk menangani konfirmasi pembayaran
+    public function confirm(Orders $order)
+    {
+        // Ubah status order menjadi diterima
+        $order->status = 'diterima';
+        $order->save();
+
+        // Kurangi stok produk berdasarkan jumlah barang yang dibeli
+        $product = Products::find($order->id); // Menggunakan $order->id karena Anda menggunakan 'id' sebagai product_id
+        if (!$product) {
+            return back()->with('error', 'Produk tidak ditemukan.');
+        }
+
+        // Periksa apakah stok mencukupi sebelum mengurangi
+        if ($product->stok >= $order->jumlah_beli) {
+            $product->stok -= $order->jumlah_beli;
+            $product->save();
+
+            return redirect()->back()->with('success', 'Order berhasil diterima. Stok produk berhasil dikurangi.');
+        } else {
+            return back()->with('error', 'Stok produk tidak mencukupi.');
+        }
+    }
+
+
+
+    // Method untuk menangani penolakan pembayaran
+    public function reject(Orders $order)
+    {
+        // Update status order menjadi ditolak
+        $order->status = 'ditolak';
+        $order->save();
+
+        return redirect()->back()->with('success', 'Order berhasil ditolak.');
+        // return redirect()->back();
+    }
+
     public function tambahAdmin()
     {
         return view('auth.register-admin');

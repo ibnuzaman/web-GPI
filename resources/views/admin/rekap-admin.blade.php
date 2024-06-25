@@ -1,15 +1,6 @@
 <x-app-layout-admin title="Rekap Data Pembayaran">
     <x-aside-admin />
 
-
-    <button id="toggleAsideBtn" class="toggle-aside-btn d-md-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-            class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
-        </svg>
-    </button>
-
     <div class="main-content">
         <x-navbar-admin />
 
@@ -21,24 +12,44 @@
                         <thead>
                             <tr class="table-primary">
                                 <th>Nama Produk</th>
-                                <th>Jumlah Barang Terjual</th>
-                                <th>Harga</th>
+                                <th>Nama Customer</th>
+                                <th>No. HP Customer</th>
+                                <th>Jumlah Barang</th>
+                                <th>Total Harga</th>
                                 <th>Tanggal</th>
+                                <th>Status</th> <!-- Kolom untuk tombol aksi -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Kondom</td>
-                                <td>50</td>
-                                <td>Rp1.000.000</td>
-                                <td>12/06/2024</td>
-                            </tr>
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td>{{ $order->nama_produk }}</td>
+                                    <td>{{ $order->nama_customer }}</td>
+                                    <td>{{ $order->nomorHp }}</td>
+                                    <td>{{ $order->jumlah_beli }}</td>
+                                    <td>Rp {{ number_format($order->total_harga, 0, ',', '.') }}</td>
+                                    <td>{{ $order->created_at->format('d/m/Y') }}</td>
+                                    <td>
+                                        @if ($order->status == 'pending')
+                                            <form action="{{ route('admin.orders.confirm', $order->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-success">Terima</button>
+                                            </form>
+                                            <form action="{{ route('admin.orders.reject', $order->id) }}"
+                                                method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Tolak</button>
+                                            </form>
+                                        @else
+                                            <span>{{ $order->status }}</span>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
-
 </x-app-layout-admin>

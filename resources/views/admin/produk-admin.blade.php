@@ -45,7 +45,7 @@
                                 <th>No</th>
                                 <th>Nama Produk</th>
                                 <th>Foto Produk</th>
-                                <th>Quantity</th>
+                                <th>Stok</th>
                                 <th>Harga</th>
                                 <th>Action</th>
                             </tr>

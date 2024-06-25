@@ -9,20 +9,25 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Orders extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'product_id',
+        'user_id',
+        'nama_customer',
+        'nomorHp',
+        'waktu_beli',
+        'nama_produk',
+        'jumlah_beli',
         'total_harga',
         'status',
-        'user_id',
+        'id',
     ];
 
-    public function users(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function product()
     {
-        return $this->belongsTo(Products::class, 'product_id');
+        return $this->belongsTo(Products::class, 'id');
     }
 }

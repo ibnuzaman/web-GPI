@@ -38,6 +38,8 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard-admin');
     Route::get('/admin/rekapData', [AdminController::class, 'rekapData'])->name('admin.rekap-admin');
     Route::get('/admin/konfirmasi-admin', [AdminController::class, 'konfirmasiBayar'])->name('admin.konfirmasi-admin');
+    Route::post('/admin/orders/{order}/acc', [AdminController::class, 'confirm'])->name('admin.orders.diterima');
+    Route::post('/admin/orders/{order}/decline', [AdminController::class, 'reject'])->name('admin.orders.ditolak');
     Route::get('/tambah-admin', [AdminController::class, 'tambahAdmin'])->name('tambah-admin');
     Route::post('/register-admin', [AdminController::class, 'storeAdmin'])->name('store.admin');
     Route::get('/admin/produk', [ProdukController::class, 'create'])->name('admin.produk-admin');

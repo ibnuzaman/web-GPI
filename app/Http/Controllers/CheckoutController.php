@@ -22,32 +22,33 @@ class CheckoutController extends Controller
 
     public function checkout(Request $request)
     {
-        // Ambil data produk dari request (biasanya dari form checkout)
-        $id = $request->input('product_id');
-        $quantity = $request->input('quantity');
+        // Validasi input
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
 
         // Temukan produk berdasarkan ID
-        $product = Products::find($id);
-
-        if (!$product) {
-            return back()->with('error', 'Produk tidak ditemukan.');
-        }
+        $product = Products::findOrFail($validated['product_id']);
 
         // Hitung total harga berdasarkan harga produk dan jumlah yang dibeli
-        $total_harga = $product->harga * $quantity;
+        $total_harga = $product->harga * $validated['quantity'];
 
-        // Simpan data order ke dalam database
-        $order = new Orders();
-        $order->product_id = $product->id;
-        $order->user_id = Auth::id(); // Ambil ID user yang sedang login
-        $order->nama_customer = $request->input('nama_customer');
-        $order->no_hp_customer = $request->input('no_hp_customer');
-        $order->jumlah_barang = $quantity;
-        $order->total_harga = $total_harga;
-        $order->status = 'pending'; // Set status awal pending
-        $order->save();
+        // Simpan data order ke dalam database menggunakan mass assignment
+        $order = Orders::create([
+            'product_id' => $product->id,
+            'nama_produk' => $product->nama_produk,
+            'user_id' => Auth::id(),
+            'nama_customer' => Auth::user()->name, // Menggunakan nama user yang sedang login
+            'nomorHp' => Auth::user()->nomorHp,    // Menggunakan nomorHp user yang sedang login
+            'jumlah_beli' => $validated['quantity'],
+            'total_harga' => $total_harga,
+            'waktu_beli' => now(),
+            'status' => 'pending',
+        ]);
 
         // Redirect ke halaman atau route yang sesuai setelah checkout
-        return redirect()->route('dashboard')->with('success', 'Pesanan berhasil dibuat.');
+        return redirect()->route('transaksi')->with('success', 'Pesanan berhasil dibuat.');
+        // return redirect()->back();
     }
 }

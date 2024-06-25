@@ -54,6 +54,11 @@
                                                 name="customer_name" value="{{ Auth::user()->name }}" readonly>
                                         </div>
                                         <div class="form-group">
+                                            <label for="nomorHp">Nomor Handphone:</label>
+                                            <input type="text" class="form-control" id="nomorHp"
+                                                value="{{ Auth::user()->nomorHp }}" readonly>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="orderTime">Waktu Pembelian:</label>
                                             <input type="text" class="form-control" id="orderTime"
                                                 value="{{ now()->format('Y-m-d H:i:s') }}" readonly>
