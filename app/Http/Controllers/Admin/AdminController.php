@@ -17,9 +17,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $orders = Orders::where('status', 'confirmed')->orderBy('created_at', 'desc')->take(5)->get();
+        $orders = Orders::where('status', 'diterima')->orderBy('created_at', 'desc')->take(5)->get();
         $totalProducts = Products::count();
-        $rekapData = RekapData::orderBy('created_at', 'desc')->take(5)->get();
+        $rekapData = Orders::where('status', 'diterima')->orderByDesc('created_at')->get();
 
         return view('admin.dashboard-admin', compact('orders', 'totalProducts', 'rekapData'));
     }

@@ -14,6 +14,8 @@
         <div class="content-container container mt-4">
             <h1>Dashboard</h1>
             <div class="row">
+
+                {{-- Rekap Konfirmasi --}}
                 <div class="col-xl-8">
                     <table class="table table-borderless table-hover">
                         <thead>
@@ -53,6 +55,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{-- Card Toltal Produk --}}
                 <div class="col-xl-4">
                     <div class="card card-product border-0">
                         <div class="card-body">
@@ -63,6 +67,8 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Rekap Data --}}
             <div class="col-xl-8 mt-3">
                 <table class="table table-borderless table-hover">
                     <thead class="table-header">
@@ -85,7 +91,7 @@
                         @foreach ($rekapData as $data)
                             <tr>
                                 <td>{{ $data->product->nama_produk }}</td>
-                                <td>{{ $data->jumlah_terjual }}</td>
+                                <td>{{ $data->jumlah_beli }}</td>
                                 <td>Rp {{ number_format($data->total_harga, 0, ',', '.') }}</td>
                                 <td>{{ $data->created_at->format('Y-m-d') }}</td>
                             </tr>
