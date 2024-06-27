@@ -29,6 +29,7 @@
                 </div>
             @endforeach
         </div>
+        {{ $products->onEachSide(5)->links('vendor.pagination.bootstrap-4') }}
     </div>
     <x-button-whatsapp />
     <x-footer />

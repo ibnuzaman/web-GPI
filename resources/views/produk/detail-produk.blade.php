@@ -47,7 +47,8 @@
                                     </div>
                                     <form id="orderForm" action="{{ route('checkout') }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="product_id" id="product_id"
+                                            value="{{ $product->id }}">
                                         <div class="form-group">
                                             <label for="customerName">Nama Customer:</label>
                                             <input type="text" class="form-control" id="customerName"
@@ -55,24 +56,23 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="nomorHp">Nomor Handphone:</label>
-                                            <input type="text" class="form-control" id="nomorHp"
+                                            <input type="text" class="form-control" id="nomorHp" name="nomor_hp"
                                                 value="{{ Auth::user()->nomorHp }}" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="orderTime">Waktu Pembelian:</label>
-                                            <input type="text" class="form-control" id="orderTime"
+                                            <input type="text" class="form-control" id="orderTime" name="order_time"
                                                 value="{{ now()->format('Y-m-d H:i:s') }}" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="productName">Nama Produk:</label>
                                             <input type="text" class="form-control" id="productName"
-                                                value="{{ $product->nama_produk }}" readonly>
+                                                name="product_name" value="{{ $product->nama_produk }}" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="productQuantity">Kuantitas Produk:</label>
                                             <input type="number" class="form-control" id="productQuantity"
-                                                name="quantity" value="1" min="1" max="999" required
-                                                onchange="updateTotalPrice()">
+                                                name="quantity" value="1" min="1" max="999" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="totalPrice">Total Harga:</label>
@@ -83,9 +83,36 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Kembali</button>
-                                            <button type="submit" class="btn btn-primary">Bayar</button>
+                                            <button type="submit" class="btn btn-primary">Checkout</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="confirmWhatsApp()">Konfirmasi WhatsApp</button>
                                         </div>
                                     </form>
+
+                                    <script>
+                                        function confirmWhatsApp() {
+                                            const customerName = document.getElementById('customerName').value;
+                                            const nomorHp = document.getElementById('nomorHp').value;
+                                            const orderTime = document.getElementById('orderTime').value;
+                                            const productName = document.getElementById('productName').value;
+                                            const productQuantity = document.getElementById('productQuantity').value;
+                                            const totalPriceDisplay = document.getElementById('totalPriceDisplay').textContent;
+
+                                            const message = `Halo, saya ingin mengkonfirmasi pesanan:\n` +
+                                                `Nama: ${customerName}\n` +
+                                                `Nomor Handphone: ${nomorHp}\n` +
+                                                `Waktu Pembelian: ${orderTime}\n` +
+                                                `Nama Produk: ${productName}\n` +
+                                                `Kuantitas Produk: ${productQuantity}\n` +
+                                                `Total Harga: ${totalPriceDisplay}`;
+
+                                            const whatsappUrl = `https://wa.me/6281311686831?text=${encodeURIComponent(message)}`;
+
+                                            window.open(whatsappUrl, '_blank');
+                                        }
+                                    </script>
+
+
                                 </div>
                             </div>
                         </div>
@@ -104,8 +131,8 @@
 
             if (currentValue > 1) {
                 quantityInput.value = currentValue - 1;
-                updateModalQuantity(quantityInput.value); // Update modal quantity
-                updateTotalPrice(); // Update total price
+                updateModalQuantity(quantityInput.value);
+                updateTotalPrice();
             }
         }
 
@@ -116,8 +143,8 @@
 
             if (currentValue < max) {
                 quantityInput.value = currentValue + 1;
-                updateModalQuantity(quantityInput.value); // Update modal quantity
-                updateTotalPrice(); // Update total price
+                updateModalQuantity(quantityInput.value);
+                updateTotalPrice();
             }
         }
 

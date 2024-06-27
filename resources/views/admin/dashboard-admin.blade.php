@@ -54,6 +54,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $orders->onEachSide(5)->links('vendor.pagination.bootstrap-4') }}
                 </div>
 
                 {{-- Card Toltal Produk --}}
@@ -98,6 +99,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $rekapData->onEachSide(5)->links('vendor.pagination.bootstrap-4') }}
             </div>
         </div>
     </div>

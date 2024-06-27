@@ -17,7 +17,7 @@ class CustomerController extends Controller
 
     public function transaksi()
     {
-        $transactions = Orders::where('user_id', Auth::id())->orderByDesc('created_at')->get();
+        $transactions = Orders::where('user_id', Auth::id())->orderByDesc('created_at')->paginate(5);
 
         return view('transaksi.transaksi', compact('transactions'));
     }

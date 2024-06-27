@@ -72,6 +72,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $orders->onEachSide(5)->links('vendor.pagination.bootstrap-4') }}
                 </div>
             </div>
         </div>

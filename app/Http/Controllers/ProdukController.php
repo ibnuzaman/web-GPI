@@ -19,7 +19,7 @@ class ProdukController extends Controller
     {
         // return view('produk.produk');
         // Ambil semua produk dari database
-        $products = Products::all();
+        $products = Products::paginate(8);
 
         // Kirim data produk ke view
         return view('produk.produk', compact('products'));
@@ -48,7 +48,8 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $products = Products::all();
+        // $products = Products::all();
+        $products = Products::paginate(3);
         return view('admin.produk-admin', compact('products'));
     }
 

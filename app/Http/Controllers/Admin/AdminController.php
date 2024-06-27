@@ -17,9 +17,9 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $orders = Orders::where('status', 'diterima')->orderBy('created_at', 'desc')->take(5)->get();
+        $orders = Orders::where('status', 'diterima')->orderBy('created_at', 'desc')->take(5)->paginate(1);
         $totalProducts = Products::count();
-        $rekapData = Orders::where('status', 'diterima')->orderByDesc('created_at')->get();
+        $rekapData = Orders::where('status', 'diterima')->orderByDesc('created_at')->paginate(1);
 
         return view('admin.dashboard-admin', compact('orders', 'totalProducts', 'rekapData'));
     }
@@ -31,14 +31,16 @@ class AdminController extends Controller
 
     public function rekapData()
     {
-        $orders = Orders::where('status', 'diterima')->orderByDesc('created_at')->get();
+
+        // $orders = Orders::where('status', 'diterima')->orderByDesc('created_at')->get();
+        $orders = Orders::where('status', 'diterima')->orderByDesc('created_at')->paginate(3);
 
         return view('admin.rekap-admin', compact('orders'));
     }
 
     public function konfirmasiBayar()
     {
-        $orders = Orders::where('status', 'pending')->orderByDesc('created_at')->get();
+        $orders = Orders::where('status', 'pending')->orderByDesc('created_at')->paginate(3);
 
         return view('admin.konfirmasi-admin', compact('orders'));
         // return view('admin.konfirmasi-admin');
