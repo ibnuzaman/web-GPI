@@ -195,4 +195,17 @@ class ProdukController extends Controller
         // return redirect()->route('edit-produk', ['id' => $id])->with('success', 'Produk berhasil dihapus.');
         return redirect()->back()->with('success', 'Produk berhasil dihapus.');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Pencarian produk berdasarkan ID atau nama
+        $products = Products::where('id', $query)
+            ->orWhere('nama_produk', 'like', '%' . $query . '%')
+            ->get();
+
+        // Kirim data produk yang ditemukan ke view
+        return view('produk.produk', compact('products'));
+    }
 }

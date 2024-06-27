@@ -5,7 +5,9 @@
         <!-- Search Bar -->
         <div class="row mb-4 search-bg">
             <div class="col-12">
-                <input type="text" class="form-control" id="searchBar" placeholder="Cari Produk">
+                <form action="{{ route('search-produk') }}" method="GET">
+                    <input type="text" class="form-control" name="query" id="searchBar" placeholder="Cari Produk">
+                </form>
             </div>
         </div>
 

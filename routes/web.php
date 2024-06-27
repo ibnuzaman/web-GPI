@@ -56,3 +56,4 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
 Route::get('/detail-produk/{id}', [ProdukController::class, 'show'])->name('detail-produk');
 Route::get('/test', [ProdukController::class, 'detailProduk']);
+Route::get('/search', [ProdukController::class, 'search'])->name('search-produk');
