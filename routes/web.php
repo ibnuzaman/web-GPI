@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/detail-produk/{id}', [ProdukController::class, 'show'])->name('detail-produk');
 });
 
 require __DIR__ . '/auth.php';
@@ -54,6 +55,6 @@ Route::middleware(['auth', 'adminMiddleware'])->group(function () {
 
 
 Route::get('/produk', [ProdukController::class, 'index'])->name('produk');
-Route::get('/detail-produk/{id}', [ProdukController::class, 'show'])->name('detail-produk');
+// Route::get('/detail-produk/{id}', [ProdukController::class, 'show'])->name('detail-produk');
 Route::get('/test', [ProdukController::class, 'detailProduk']);
 Route::get('/search', [ProdukController::class, 'search'])->name('search-produk');

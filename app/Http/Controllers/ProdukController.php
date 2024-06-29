@@ -201,10 +201,10 @@ class ProdukController extends Controller
     {
         $query = $request->input('query');
 
-        // Pencarian produk berdasarkan ID atau nama
+        // Pencarian produk berdasarkan ID atau nama dengan paginasi
         $products = Products::where('id', $query)
             ->orWhere('nama_produk', 'like', '%' . $query . '%')
-            ->get();
+            ->paginate(10); // Paginasi dengan 10 item per halaman
 
         // Kirim data produk yang ditemukan ke view
         return view('produk.produk', compact('products'));
